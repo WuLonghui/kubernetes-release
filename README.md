@@ -27,7 +27,5 @@ The release includes an errand to deploy the
 $ bosh run errand guestbook-example
 ```
 
-## Thanks
-
-Thanks to [Brian Ketelsen](https://github.com/bketelsen/coreos-kubernetes-digitalocean)
-and [CF Platform Engineering](https://github.com/cf-platform-eng/docker-boshrelease).
+##Note
+Forked from [CloudCredo/kubernetes-release](https://github.com/CloudCredo/kubernetes-release) 
