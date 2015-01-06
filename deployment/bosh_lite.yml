@@ -1,0 +1,140 @@
+compilation:
+  cloud_properties: {}
+  network: default
+  reuse_compilation_vms: false
+  workers: 4
+director_uuid: cf8dc1fc-9c42-4ffc-96f1-fbad983a6ce6 
+jobs:
+- instances: 1
+  name: master
+  networks:
+  - name: default
+    static_ips:
+    - 10.244.8.6
+  persistent_disk: 65536
+  properties:
+    apiserver:
+      machines:
+      - 10.244.8.6
+      - 10.244.8.10
+      - 10.244.8.14
+    networks:
+      apps: default
+  resource_pool: default
+  templates:
+  - name: docker
+  - name: etcd
+  - name: flannel
+  - name: kubernetes-minion
+  - name: kubernetes-master
+- instances: 2
+  name: minion
+  networks:
+  - name: default
+    static_ips:
+    - 10.244.8.10
+    - 10.244.8.14
+  persistent_disk: 65536
+  properties:
+    networks:
+      apps: default
+  resource_pool: default
+  templates:
+  - name: docker
+  - name: etcd
+  - name: flannel
+  - name: kubernetes-minion
+- instances: 1
+  lifecycle: errand
+  name: guestbook-example
+  networks:
+  - name: default
+    static_ips:
+    - 10.244.8.18
+  properties:
+    apiserver:
+      host: 10.244.8.6
+    networks:
+      apps: default
+  resource_pool: default
+  templates:
+  - name: guestbook-example
+  - name: etcd
+  - name: flannel
+name: kubernetes
+networks:
+- name: default
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.8.4/30
+    reserved:
+    - 10.244.8.5
+    static:
+    - 10.244.8.6
+  - cloud_properties: {}
+    range: 10.244.8.8/30
+    reserved:
+    - 10.244.8.9
+    static:
+    - 10.244.8.10
+  - cloud_properties: {}
+    range: 10.244.8.12/30
+    reserved:
+    - 10.244.8.13
+    static:
+    - 10.244.8.14
+  - cloud_properties: {}
+    range: 10.244.8.16/30
+    reserved:
+    - 10.244.8.17
+    static:
+    - 10.244.8.18
+  - cloud_properties: {}
+    range: 10.244.8.20/30
+    reserved:
+    - 10.244.8.21
+    static:
+    - 10.244.8.22
+  - cloud_properties: {}
+    range: 10.244.8.24/30
+    reserved:
+    - 10.244.8.25
+    static: []
+  - cloud_properties: {}
+    range: 10.244.8.28/30
+    reserved:
+    - 10.244.8.29
+    static: []
+  - cloud_properties: {}
+    range: 10.244.8.32/30
+    reserved:
+    - 10.244.8.33
+    static: []
+  - cloud_properties: {}
+    range: 10.244.8.36/30
+    reserved:
+    - 10.244.8.37
+    static: []
+properties:
+  etcd:
+    machines:
+    - 10.244.8.6
+    - 10.244.8.10
+    - 10.244.8.14
+releases:
+- name: kubernetes
+  version: latest
+resource_pools:
+- cloud_properties: {}
+  name: default
+  network: default
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: latest
+update:
+  canaries: 0
+  canary_watch_time: 30000-240000
+  max_in_flight: 32
+  serial: false
+  update_watch_time: 30000-240000
+

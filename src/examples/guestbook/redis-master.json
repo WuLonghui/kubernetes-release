@@ -1,0 +1,25 @@
+{
+  "id": "redis-master",
+  "kind": "Pod",
+  "apiVersion": "v1beta1",
+  "desiredState": {
+    "manifest": {
+      "version": "v1beta1",
+      "id": "redis-master",
+      "containers": [{
+        "name": "master",
+        "image": "10.175.100.157:5000/kubernetes/redis",
+        "imagePullPolicy": "PullIfNotPresent",
+        "cpu": 100,
+        "ports": [{
+          "containerPort": 6379,
+          "hostPort": 6379
+        }]
+      }]
+    }
+  },
+  "labels": {
+    "name": "redis-master"
+  }
+}
+    

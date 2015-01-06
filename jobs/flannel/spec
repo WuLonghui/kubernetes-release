@@ -1,0 +1,16 @@
+---
+name: flannel
+
+packages:
+  - common
+  - git
+  - golang
+  - etcdctl
+  - flannel
+
+templates:
+  flannel_ctl.erb: bin/flannel_ctl
+
+properties:
+  networks.apps:
+    description: "Used to get our IP address"

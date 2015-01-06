@@ -1,0 +1,5 @@
+---
+blobstore:
+  provider: simple
+  options:
+    endpoint: http://10.175.100.157:9999

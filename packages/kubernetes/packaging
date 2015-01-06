@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e -x
+tar zxf kubernetes/kubernetes.tar.gz
+tar zxf kubernetes/server/kubernetes-server-linux-amd64.tar.gz 
+cp kubernetes/server/bin/* ${BOSH_INSTALL_TARGET}
+

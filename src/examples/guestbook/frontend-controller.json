@@ -1,0 +1,29 @@
+{
+  "id": "frontendController",
+  "kind": "ReplicationController",
+  "apiVersion": "v1beta1",
+  "desiredState": {
+    "replicas": 3,
+    "replicaSelector": {"name": "frontend"},
+    "podTemplate": {
+      "desiredState": {
+         "manifest": {
+           "version": "v1beta1",
+           "id": "frontendController",
+           "containers": [{
+             "name": "php-redis",
+             "image": "10.175.100.157:5000/kubernetes/example-guestbook-php-redis",
+             "imagePullPolicy": "PullIfNotPresent",
+             "cpu": 100,
+             "memory": 50000000,
+             "ports": [{"containerPort": 80, "hostPort": 8000}]
+           }]
+         }
+       },
+       "labels": {
+         "name": "frontend",
+         "uses": "redisslave,redis-master"
+       }
+      }},
+  "labels": {"name": "frontend"}
+}

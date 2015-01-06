@@ -1,0 +1,41 @@
+---
+golang/go1.2.1.linux-amd64.tar.gz:
+  object_id: aac8c6d6-f98a-48dd-8250-92f9309e046d
+  sha: !binary |-
+    NzYwNWY1NzdmZjZhYzJkNjA4YTNhNGU4MjliMjU1YWUyZWJjOGRjZg==
+  size: 56123695
+kubernetes/kubernetes.tar.gz:
+  object_id: ce47fd70-93b1-4af1-95d2-69d3442e2446
+  sha: !binary |-
+    OGNhYTcxMGNiNzE4YjlmYTVlNDZjMjI1MWMwYjYyMWYzMWJkOWVjOQ==
+  size: 82300483
+docker/aufs-tools_3.2+20130722-1.1_amd64.deb:
+  object_id: 872b36c9-8e8d-46c5-b21c-c33d411ce07f
+  sha: !binary |-
+    NzM2OTIyZTMyYmY0M2ZhY2VmNjE3ZjhlYTBiYjljN2FhOWVmZGNkYg==
+  size: 92274
+docker/autoconf-2.69.tar.gz:
+  object_id: b80b9274-5c9a-421f-ba22-753cdb2f82cb
+  sha: !binary |-
+    NTYyNDcxY2JjYjBkZDBmYTQyYTc2NjY1YWNmMGRiYjY4NDc5Yjc4YQ==
+  size: 1927468
+docker/docker-1.2.0:
+  object_id: fce0208d-7b3a-4b12-b6f6-aed917d48610
+  sha: !binary |-
+    NTQwNDU5YmM1ZDlmMWNhYzE3ZmU4NjU0ODkxODE0MzE0ZGIxNWU3Nw==
+  size: 13398472
+git/git-1.7.11.2.tar.gz:
+  object_id: 786151e8-a1ee-4a53-8f8a-54ecdf9b52c9
+  sha: !binary |-
+    ZjY3YjRmNmMwMjc3MjUwNDExYzY4NzJhZTdiOGE4NzJhZTExZDMxMw==
+  size: 4015780
+mercurial/mercurial-3.1.1.tar.gz:
+  object_id: e11cbd24-5a10-47cf-a7ff-d57ae072bacc
+  sha: !binary |-
+    MDljYjQxN2Y1NTE3NTI2MmZjYmU1MTBhZjg4ZGI3NmJiODkzNTcyZQ==
+  size: 3982765
+python/Python-2.7.8.tgz:
+  object_id: 055921e4-be79-40a1-86b9-91eb45510286
+  sha: !binary |-
+    NTExOTYwZGQ3ODQ1MWEwNmM5ZGY3NjUwOTYzNWFlZWMwNWIyMDUxYQ==
+  size: 14846119
