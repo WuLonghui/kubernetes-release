@@ -52,5 +52,6 @@ jobs:
 properties:
   etcd:
     machines: (( merge ))
-
+  docker: (( merge ))
+  
 resource_pools: (( merge ))

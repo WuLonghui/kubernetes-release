@@ -13,6 +13,12 @@ else
   hostname <%= index %>.<%= name %>.<%= spec.networks.methods(false).grep(/[^=]$/).first.to_s %>.<%= spec.deployment %>.<%= spec.dns_domain_name %>
 fi
 
+# Set docker for easy using
+if [ ! -f "/usr/bin/docker" ]; then
+  echo "export DOCKER_HOST=unix://${DOCKER_PID_DIR}/docker.sock" > /etc/profile.d/docker.sh
+  ln -s /var/vcap/packages/docker/bin/docker /usr/bin/docker
+fi 
+
 case $1 in
 
   start)
@@ -68,6 +74,7 @@ case $1 in
         ${DOCKER_DNS_SERVERS:-} \
         ${DOCKER_DNS_DOMAINS:-} \
         ${DOCKER_MTU:-} \
+        ${DOCKER_INSECURE_REGISTRY:-} \
         >>${DOCKER_LOG_DIR}/${OUTPUT_LABEL}.stdout.log \
         2>>${DOCKER_LOG_DIR}/${OUTPUT_LABEL}.stderr.log
     ;;

@@ -2,7 +2,7 @@
 
 RUN_DIR=/var/vcap/sys/run/kubelet
 PIDFILE=$RUN_DIR/kubelet.pid
-JOB_DIR=/var/vcap/jobs/kubelet
+JOB_DIR=/var/vcap/jobs/kubernetes-minion
 STORE_DIR=/var/vcap/store/kubelet
 
 source /var/vcap/packages/common/utils.sh
@@ -16,6 +16,9 @@ case $1 in
     chown -R vcap:vcap $RUN_DIR
     mkdir -p $STORE_DIR
     chown -R vcap:vcap $STORE_DIR
+
+    # Load docker images
+    source $JOB_DIR/bin/load_docker_images
 
     echo $$ > $PIDFILE
 

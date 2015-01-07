@@ -52,6 +52,8 @@ properties:
     description: 'Array of DNS search domains to be used by Docker'
   docker.mtu:
     description: 'Docker Containers network MTU'
+  docker.insecure_registry:
+    description: 'Enable insecure communication with specified registries'
   docker.daemon.logrotate.frequency:
     description: 'Frequency to run logrotate for Docker daemon log files (crontab five time and date fields)'
     default: '0 * * * *'

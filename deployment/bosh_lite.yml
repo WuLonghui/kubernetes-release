@@ -121,6 +121,10 @@ properties:
     - 10.244.8.6
     - 10.244.8.10
     - 10.244.8.14
+  docker:
+    insecure_registry: 
+    - 10.175.100.157:5000
+    - 9.91.5.180:5000
 releases:
 - name: kubernetes
   version: latest

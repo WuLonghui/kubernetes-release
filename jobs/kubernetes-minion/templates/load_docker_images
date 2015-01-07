@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -e
+set -x
+
+export PATH=/var/vcap/packages/docker/bin:$PATH
+
+DOCKER_HOST=unix:///var/vcap/sys/run/docker/docker.sock
+DOCKER_IMAGES_DIR=/var/vcap/packages/docker/images
+DOCKER_IMAGES_SPEC=${DOCKER_IMAGES_DIR}/spec
+
+load_docker_image() {
+  local _image_name=$1
+  local _image_id=$2
+  local _image_file=$3
+  local _image_tag=$(md5sum $_image_file | awk '{ print $1 }')
+
+  if test $(docker -H $DOCKER_HOST images | grep -c "${_image_name}.*${_image_tag}") -gt 0
+  then
+    echo "${_image_name}:${_image_tag} Docker image already loaded"
+  else
+    echo "Loading ${_image_name}:${_image_tag} Docker image..."
+    gzip -d -c < $_image_file | docker -H $DOCKER_HOST load
+    docker -H $DOCKER_HOST tag ${_image_id} ${_image_name}:latest
+    docker -H $DOCKER_HOST tag ${_image_id} ${_image_name}:${_image_tag}
+    echo "Finished loading ${_image_name}:${_image_tag} Docker image from $_image_file"
+  fi
+}
+
+run() {
+  local _line
+  local _docker_name
+  local _docker_id
+  local _docker_file
+  
+  if [ -f ${DOCKER_IMAGES_SPEC} ]
+  then
+    while read _line  
+    do  
+      echo ${_line}
+      set $(echo $_line | tr ':' ' ')
+      _docker_name=$1
+      shift
+      _docker_id=$1
+      shift
+      _docker_file=$1
+      shift
+
+      echo "Docker spec: $_docker_name $_docker_id ${DOCKER_IMAGES_DIR}/$_docker_file"
+      load_docker_image $_docker_name $_docker_id ${DOCKER_IMAGES_DIR}/$_docker_file
+    done < ${DOCKER_IMAGES_SPEC}  
+  fi
+}
+
+run

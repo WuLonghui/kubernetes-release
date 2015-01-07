@@ -68,3 +68,7 @@ export DOCKER_DNS_DOMAINS="<%= dns_domains_list %>"
 # Docker Containers network MTU
 export DOCKER_MTU="--mtu <%= mtu %>"
 <% end %>
+
+<% if_p('docker.insecure_registry') do |insecure_registry| %>
+export DOCKER_INSECURE_REGISTRY="--insecure-registry <%= insecure_registry.join(" --insecure-registry ") %>"
+<% end %>

@@ -50,3 +50,6 @@ echo "Copying Docker ${DOCKER_VERSION}..."
 mkdir -p ${BOSH_INSTALL_TARGET}/bin
 cp -a ${BOSH_COMPILE_TARGET}/docker/docker-${DOCKER_VERSION} ${BOSH_INSTALL_TARGET}/bin/docker
 chmod +x ${BOSH_INSTALL_TARGET}/bin/docker
+
+# Copy Docker images
+cp -r ${BOSH_COMPILE_TARGET}/docker/images ${BOSH_INSTALL_TARGET}

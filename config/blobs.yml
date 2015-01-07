@@ -39,3 +39,18 @@ python/Python-2.7.8.tgz:
   sha: !binary |-
     NTExOTYwZGQ3ODQ1MWEwNmM5ZGY3NjUwOTYzNWFlZWMwNWIyMDUxYQ==
   size: 14846119
+docker/images/spec:
+  object_id: de0bc9b8-f8d1-4fa4-88ee-086de3d4f144
+  sha: !binary |-
+    ZDY2MmJmZTg2NGU5MzYxNjVhNDM3NjAyZTJjY2VmZTIyZjMzNzc2OQ==
+  size: 67
+docker/images/kubernetes_pause_docker_image.tar.gz:
+  object_id: 10674eb4-4a04-4d20-97a4-6945552e5b6b
+  sha: !binary |-
+    MjZlZWQ0ZWNiMWFmMWE4YmMyMDkyMmI4NWQ2MDkzY2I3MDM5Y2JkNg==
+  size: 71253
+docker/bridge-utils-1.5.tar.gz:
+  object_id: 7c1d61cb-5204-42fa-ad10-1c9ada02bf46
+  sha: !binary |-
+    MTlkMmE1OGNkM2E3MGY5NzFhYTkzMWI0MDI1NjE3NGE4NDdlNjBkNg==
+  size: 33243

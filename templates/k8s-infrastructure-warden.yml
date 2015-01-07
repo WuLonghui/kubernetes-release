@@ -73,3 +73,7 @@ jobs:
 properties:
   etcd:
     machines: (( jobs.master.networks.default.static_ips jobs.minion.networks.default.static_ips ))
+  docker:
+    insecure_registry:
+    - 10.175.100.157:5000
+    - 9.91.5.180:5000
