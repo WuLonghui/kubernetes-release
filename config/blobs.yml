@@ -19,11 +19,11 @@ docker/autoconf-2.69.tar.gz:
   sha: !binary |-
     NTYyNDcxY2JjYjBkZDBmYTQyYTc2NjY1YWNmMGRiYjY4NDc5Yjc4YQ==
   size: 1927468
-docker/docker-1.2.0:
-  object_id: fce0208d-7b3a-4b12-b6f6-aed917d48610
+docker/docker-1.3.1:
+  object_id: bb1df221-f19a-4533-a365-e0faac437273
   sha: !binary |-
-    NTQwNDU5YmM1ZDlmMWNhYzE3ZmU4NjU0ODkxODE0MzE0ZGIxNWU3Nw==
-  size: 13398472
+    ZGQyOGFjMzViYjU5ZTJjOTczOTlkNGMwZTYxM2M2YzJiNjRiMmI5NA==
+  size: 14155072
 git/git-1.7.11.2.tar.gz:
   object_id: 786151e8-a1ee-4a53-8f8a-54ecdf9b52c9
   sha: !binary |-
