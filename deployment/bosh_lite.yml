@@ -13,7 +13,7 @@ jobs:
     - 10.244.8.6
   persistent_disk: 65536
   properties:
-    apiserver:
+    minion:
       machines:
       - 10.244.8.6
       - 10.244.8.10

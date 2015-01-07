@@ -17,7 +17,7 @@ case $1 in
 
     exec chpst -u vcap:vcap /var/vcap/packages/kubernetes/kube-controller-manager \
 --master=127.0.0.1:8080 \
---machines=<%= p('apiserver.machines').join(',') %> \
+--machines=<%= p('minion.machines').join(',') %> \
 --logtostderr=true
     ;;
 

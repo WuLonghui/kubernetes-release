@@ -53,7 +53,7 @@ jobs:
       - name: default
         static_ips: (( static_ips(0) ))
     properties:
-      apiserver:
+      minion:
         machines: (( jobs.master.networks.default.static_ips jobs.minion.networks.default.static_ips ))
   - name: minion
     instances: 2
