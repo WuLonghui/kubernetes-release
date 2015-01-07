@@ -1,5 +1,8 @@
 #!/bin/bash
+
 set -e
+set -x
+
 API_HOST=<%= properties.apiserver.host %>
 PATH=$PATH:/var/vcap/packages/kubernetes/
 cd /var/vcap/packages/guestbook-example
@@ -13,7 +16,7 @@ frontend_pod_ips=()
 while [ "${#frontend_pod_ips[@]}" -ne "3" ]
 do
   sleep 1
-  frontend_pod_ips=($(kubecfg -h http://${API_HOST}:8080 '-template={{range.Items}}{{.CurrentState.PodIP}} {{end}}' '-l=name=frontend' list pods))
+  frontend_pod_ips=($(kubecfg -h http://${API_HOST}:8080 '-template={{range.items}}{{.currentState.podIP}} {{end}}' '-l=name=frontend' list pods))  
 done
 
 for pod_ip in "${frontend_pod_ips[@]}"
