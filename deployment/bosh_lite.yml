@@ -3,7 +3,7 @@ compilation:
   network: default
   reuse_compilation_vms: false
   workers: 4
-director_uuid: cf8dc1fc-9c42-4ffc-96f1-fbad983a6ce6 
+director_uuid: cf8dc1fc-9c42-4ffc-96f1-fbad983a6ce6
 jobs:
 - instances: 1
   name: master
@@ -11,29 +11,26 @@ jobs:
   - name: default
     static_ips:
     - 10.244.8.6
-  persistent_disk: 65536
   properties:
     minion:
       machines:
-      - 10.244.8.6
       - 10.244.8.10
       - 10.244.8.14
+      - 10.244.8.18
     networks:
       apps: default
   resource_pool: default
   templates:
-  - name: docker
   - name: etcd
-  - name: flannel
-  - name: kubernetes-minion
   - name: kubernetes-master
-- instances: 2
+- instances: 3
   name: minion
   networks:
   - name: default
     static_ips:
     - 10.244.8.10
     - 10.244.8.14
+    - 10.244.8.18
   persistent_disk: 65536
   properties:
     networks:
@@ -50,7 +47,7 @@ jobs:
   networks:
   - name: default
     static_ips:
-    - 10.244.8.18
+    - 10.244.8.22
   properties:
     apiserver:
       host: 10.244.8.6
@@ -116,15 +113,16 @@ networks:
     - 10.244.8.37
     static: []
 properties:
+  docker:
+    insecure_registry:
+    - 10.175.100.157:5000
+    - 9.91.5.180:5000
   etcd:
     machines:
     - 10.244.8.6
     - 10.244.8.10
     - 10.244.8.14
-  docker:
-    insecure_registry: 
-    - 10.175.100.157:5000
-    - 9.91.5.180:5000
+    - 10.244.8.18
 releases:
 - name: kubernetes
   version: latest

@@ -1,14 +1,10 @@
 jobs:
   - name: master
     templates:
-      - name: docker
       - name: etcd
-      - name: flannel
-      - name: kubernetes-minion
       - name: kubernetes-master
     instances: 1
     resource_pool: default
-    persistent_disk: 65536
     networks:
       - name: default
         static_ips: (( merge ))
@@ -23,7 +19,7 @@ jobs:
       - name: etcd
       - name: flannel
       - name: kubernetes-minion
-    instances: 2
+    instances: 3
     resource_pool: default
     persistent_disk: 65536
     networks:

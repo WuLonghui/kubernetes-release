@@ -54,18 +54,18 @@ jobs:
         static_ips: (( static_ips(0) ))
     properties:
       minion:
-        machines: (( jobs.master.networks.default.static_ips jobs.minion.networks.default.static_ips ))
+        machines: (( jobs.minion.networks.default.static_ips ))
   - name: minion
-    instances: 2
+    instances: 3
     networks:
       - name: default
-        static_ips: (( static_ips(1, 2) ))
+        static_ips: (( static_ips(1, 2, 3) ))
   - name: guestbook-example
     lifecycle: errand
     instances: 1
     networks:
       - name: default
-        static_ips: (( static_ips(3) ))
+        static_ips: (( static_ips(4) ))
     properties:
       apiserver:
         host: (( jobs.master.networks.default.static_ips.[0] ))
