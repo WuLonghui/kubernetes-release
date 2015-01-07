@@ -58,6 +58,19 @@ jobs:
   - name: guestbook-example
   - name: etcd
   - name: flannel
+- instances: 1
+  lifecycle: errand
+  name: kubernetes-clean-up
+  networks:
+  - name: default
+    static_ips:
+    - 10.244.8.26
+  properties:
+    apiserver:
+      host: 10.244.8.6
+  resource_pool: default
+  templates:
+  - name: kubernetes-clean-up
 name: kubernetes
 networks:
 - name: default
@@ -96,7 +109,8 @@ networks:
     range: 10.244.8.24/30
     reserved:
     - 10.244.8.25
-    static: []
+    static:
+    - 10.244.8.26
   - cloud_properties: {}
     range: 10.244.8.28/30
     reserved:

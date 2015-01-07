@@ -1,0 +1,74 @@
+#!/bin/bash
+
+set -e
+set -x
+
+API_HOST=<%= properties.apiserver.host %>
+PATH=$PATH:/var/vcap/packages/kubernetes/
+
+__say() {
+  local _msg=$1
+  echo "$_msg"
+}
+
+#Clean up
+clean_up_services() {
+  local _service_ids=($(kubecfg -h http://${API_HOST}:8080 '-template={{range.items}}{{.id}} {{end}}' list services))
+  local _service_id
+
+  __say "Clean up services"
+  for _service_id in "${_service_ids[@]}"
+  do
+    if [ "${_service_id}" != "kubernetes-ro" ] && [ "${_service_id}" != "kubernetes" ]; then
+      __say "Delete service ${_service_id}"
+      kubecfg -h http://${API_HOST}:8080 delete services/${_service_id}
+    fi
+  done
+}
+
+clean_up_replication_controllers() {
+  local _replication_controllers_ids=($(kubecfg -h http://${API_HOST}:8080 '-template={{range.items}}{{.id}} {{end}}' list replicationControllers))
+  local _replication_controllers_id
+
+  __say "Clean up replication controllers"
+  for _replication_controllers_id in "${_replication_controllers_ids[@]}"
+  do
+    __say "Delete replication controller ${_replication_controllers_id}"
+    kubecfg -h http://${API_HOST}:8080 delete replicationControllers/${_replication_controllers_id}
+  done
+}
+
+clean_up_pods() {
+  local _pod_ids=($(kubecfg -h http://${API_HOST}:8080 '-template={{range.items}}{{.id}} {{end}}' list pods))
+  local _pod_id
+
+  __say "Clean up pods"
+  for _pod_id in "${_pod_ids[@]}"
+  do
+    __say "Delete pod ${_pod_id}"
+    kubecfg -h http://${API_HOST}:8080 delete pods/${_pod_id}
+  done
+}
+
+clean_up() {
+  clean_up_services
+  clean_up_replication_controllers
+  clean_up_pods
+}
+
+show() {
+  __say ""
+  __say "List services"
+  kubecfg -h http://${API_HOST}:8080 list services
+
+  __say "List replication controllers"
+  kubecfg -h http://${API_HOST}:8080 list replicationControllers
+  
+  __say "List pods"
+  kubecfg -h http://${API_HOST}:8080 list pods
+  __say ""
+}
+
+show
+clean_up
+show

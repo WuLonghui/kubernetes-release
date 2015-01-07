@@ -44,6 +44,18 @@ jobs:
         host: (( static_ips(0) ))
       networks:
         apps: default
+  - name: kubernetes-clean-up
+    lifecycle: errand
+    templates:
+      - name: kubernetes-clean-up
+    instances: 1
+    resource_pool: default
+    networks:
+      - name: default
+        static_ips: (( merge ))
+    properties:
+      apiserver:
+        host: (( static_ips(0) ))
 
 properties:
   etcd:
