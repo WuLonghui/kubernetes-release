@@ -1,0 +1,72 @@
+resource_pools:
+  - name: default
+    network: default
+    size: (( auto ))
+    stemcell:
+      name: bosh-openstack-kvm-ubuntu-trusty-go_agent 
+      version: latest
+    cloud_properties:
+      instance_type: m1.small
+
+compilation:
+  workers: 1
+  cloud_properties:
+    instance_type: m1.small
+
+networks:
+  - name: default
+    subnets:
+      - name: private
+        range: 8.8.8.0/24 # CHANGE
+        gateway: 8.8.8.1 # CHANGE
+        reserved:
+          - 8.8.8.2 - 8.8.8.100 # CHANGE
+        static:
+          - 8.8.8.110 - 8.8.8.254 # CHANGE
+        cloud_properties:
+          net_id: 60a826b4-6f34-4baa-b2a0-98052cd9f90c # CHANGE
+
+jobs:
+  - name: master
+    resource_pool: default
+    instances: 1
+    networks:
+      - name: default
+        static_ips: (( static_ips(0) ))
+    properties:
+      minion:
+        machines: (( jobs.minion.networks.default.static_ips ))
+  - name: minion
+    resource_pool: default
+    instances: 3
+    networks:
+      - name: default
+        static_ips: (( static_ips(1, 2, 3) ))
+  - name: guestbook-example
+    lifecycle: errand
+    resource_pool: default
+    instances: 1
+    networks:
+      - name: default
+        static_ips: (( static_ips(4) ))
+    properties:
+      apiserver:
+        host: (( jobs.master.networks.default.static_ips.[0] ))
+  - name: kubernetes-clean-up
+    lifecycle: errand
+    resource_pool: default
+    instances: 1
+    networks:
+      - name: default
+        static_ips: (( static_ips(5) ))
+    properties:
+      apiserver:
+        host: (( jobs.master.networks.default.static_ips.[0] ))
+
+properties:
+  etcd:
+    machines: (( jobs.master.networks.default.static_ips jobs.minion.networks.default.static_ips ))
+  docker:
+    insecure_registry:
+    - 10.175.100.157:5000
+    - 9.91.5.180:5000

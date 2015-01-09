@@ -6,8 +6,23 @@ Deploy [Kubernetes](http://kubernetes.io) easily with this
 ## Version
 * Kubernetes: v0.7.2
 
-## Kubernetes on your laptop
+## Deploy Kubernetes
+### BOSH
+* Install [BOSH](https://github.com/cloudfoundry/bosh)
+* Deployment Kubernetes:
+    * Openstack
+```
+$ bosh upload stemcell https://s3.amazonaws.com/bosh-jenkins-artifacts/bosh-stemcell/openstack/bosh-stemcell-2605-openstack-kvm-ubuntu-trusty-go_agent.tgz
+$ cd kubernetes-release
+$ bosh create release
+$ bosh upload release
+$ vi templates/k8s-infrastructure-openstack.yml #Change the openstack-stub, like network settings
+$ ./generate_deployment_manifest openstack $(bosh status --uuid) > manifest.yml
+$ bosh deployment manifest.yml
+$ bosh -n deploy
+```
 
+### BOSH Lite
 * Install [BOSH Lite](https://github.com/cloudfoundry/bosh-lite) and
   boot the Vagrant VM.
 * Deploy Kubernetes:
