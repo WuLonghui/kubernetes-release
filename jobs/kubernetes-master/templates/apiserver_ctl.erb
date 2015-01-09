@@ -18,7 +18,7 @@ case $1 in
 
     exec chpst -u vcap:vcap /var/vcap/packages/kubernetes/kube-apiserver \
 --address=0.0.0.0 \
---portal_net=10.247.0.0/16 \
+--portal_net=10.100.0.0/16 \
 --port=8080 \
 --etcd_servers=http://127.0.0.1:4001 \
 --logtostderr=true
